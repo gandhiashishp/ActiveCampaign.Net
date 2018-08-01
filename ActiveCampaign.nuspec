@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ActiveCampaigns</id>
+    <version>$version$</version>
+    <title>ActiveCampaigns</title>
+    <authors>Community</authors>
+    <owners>Community</owners>
+    <licenseUrl>https://github.com/gandhiashishp/ActiveCampaign.Net</licenseUrl>
+    <projectUrl>https://github.com/gandhiashishp/ActiveCampaign.Net</projectUrl>
+    <iconUrl>https://github.com/gandhiashishp/ActiveCampaign.Net</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The class libraries for the Active Campaign project.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>ActiveCampaign.Net</tags>
+    <dependencies>
+	    <dependency id="Newtonsoft.Json" version="11.0.2" />
+    </dependencies> 	
+  </metadata>
+  <files>
+	  <file src="bin\Release\ActiveCampaign.Net.dll" target="lib\net40" />
+    <file src="bin\Release\Newtonsoft.Json.dll" target="lib\net40" />
+  </files>  
+ 
+</package>

@@ -9,24 +9,19 @@ using ActiveCampaign.Net.Models;
 
 namespace ActiveCampaign.Net.Services
 {
-    #region usings
-
-    
-
-    #endregion
-
     public abstract class ActiveCampaignService
     {
-        public string ApiUrl;
-        public string ApiKey;
-        public string ApiPassword;
+        public string ApiUrl { get; set; }
+        public string ApiKey { get; set; }
+        public string ApiPassword { get; set; }
 
         protected ActiveCampaignService(string apiKey, string apiUrl, string apiPassword = null)
         {
             if (string.IsNullOrEmpty(apiUrl))
-                throw new ArgumentException(Resources.ActiveCampaign.Invalid_API_Url, "apiUrl");
+                throw new ArgumentException(Resources.ActiveCampaign.Invalid_API_Url, nameof(apiUrl));
+
             if (string.IsNullOrEmpty(apiKey))
-                throw new ArgumentException(Resources.ActiveCampaign.Invalid_API_key, "apiKey");
+                throw new ArgumentException(Resources.ActiveCampaign.Invalid_API_key, nameof(apiKey));
 
             ApiKey = apiKey;
             ApiUrl = CreateBaseUrl(apiUrl) + "&api_key=" + apiKey;
@@ -53,18 +48,18 @@ namespace ActiveCampaign.Net.Services
         public string SendRequest(string method, Dictionary<string, string> getParameters = null, Dictionary<string, string> postParameters = null)
         {
             if (string.IsNullOrEmpty(method))
-                throw new ArgumentException("A valid ActiveCampaign API method was not specified", "method");
+                throw new ArgumentException("A valid ActiveCampaign API method was not specified", nameof(method));
 
             var urlBuilder = new StringBuilder();
             urlBuilder.Append(ApiUrl);
-            urlBuilder.Append("&api_action=" + method);
+            urlBuilder.Append("&api_action=").Append(method);
 
 
             if (getParameters != null)
             {
                 foreach (var parameter in getParameters)
                 {
-                    urlBuilder.Append(string.Format("&{0}={1}", HttpUtility.UrlEncode(parameter.Key), HttpUtility.UrlEncode(parameter.Value)));
+                    urlBuilder.AppendFormat("&{0}={1}", HttpUtility.UrlEncode(parameter.Key), HttpUtility.UrlEncode(parameter.Value));
                 }
             }
 
@@ -76,8 +71,7 @@ namespace ActiveCampaign.Net.Services
 
                 foreach (var postParameter in postParameters)
                 {
-                    requestData.Append(
-                        string.Format("&{0}={1}", HttpUtility.UrlEncode(postParameter.Key), HttpUtility.UrlEncode(postParameter.Value)));
+                    requestData.AppendFormat("&{0}={1}", HttpUtility.UrlEncode(postParameter.Key), HttpUtility.UrlEncode(postParameter.Value));
                 }
 
                 var postString = requestData.ToString().Substring(1);
@@ -121,7 +115,6 @@ namespace ActiveCampaign.Net.Services
             }
 
             return false;
-
         }
     }
 }

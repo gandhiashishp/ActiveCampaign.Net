@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ActiveCampaign.Net</RootNamespace>
     <AssemblyName>ActiveCampaign.Net</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,11 +30,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -50,6 +52,10 @@
     <Compile Include="Models\Account\AccountAdd.cs" />
     <Compile Include="Models\Account\AccountListResponse.cs" />
     <Compile Include="Models\Account\AccountPlansResponse.cs" />
+    <Compile Include="Models\Campaign\CampaignCreate.cs" />
+    <Compile Include="Models\Campaign\CampaignCreateResponse.cs" />
+    <Compile Include="Models\Campaign\MessageAdd.cs" />
+    <Compile Include="Models\Campaign\MessageAddResponse.cs" />
     <Compile Include="Models\Contact\BasicContactInfo.cs" />
     <Compile Include="Models\Contact\BasicContactList.cs" />
     <Compile Include="Models\ContactList.cs" />
@@ -68,6 +74,7 @@
     <Compile Include="Models\Result.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\ActiveCampaignService.cs" />
+    <Compile Include="Services\CampaignService.cs" />
     <Compile Include="Services\ContactService.cs" />
     <Compile Include="Services\ExceptionService.cs" />
     <Compile Include="Services\ClientService.cs" />
@@ -79,7 +86,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="ActiveCampaign.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

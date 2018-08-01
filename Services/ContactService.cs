@@ -1,32 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ActiveCampaign.Net.Models.Contact;
-using Newtonsoft.Json;
-
-namespace ActiveCampaign.Net.Services
+﻿namespace ActiveCampaign.Net.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ActiveCampaign.Net.Models.Contact;
+    using Newtonsoft.Json;
+
+    /// <summary>
+    /// Defines the <see cref="ContactService" />
+    /// </summary>
     public class ContactService : ActiveCampaignService
     {
-        public ContactService(string apiKey = null, string apiUrl = null, string apiPassword = null) : base(apiKey, apiUrl, apiPassword) { }
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContactService"/> class.
+        /// </summary>
+        /// <param name="apiKey">The API key <see cref="string"/></param>
+        /// <param name="apiUrl">The API URL<see cref="string"/></param>
+        /// <param name="apiPassword">The API Password<see cref="string"/></param>
+        public ContactService(string apiKey = null, string apiUrl = null, string apiPassword = null) : base(apiKey, apiUrl, apiPassword)
+        {
+        }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// View only one contact's details by searching for their email address.
         /// </summary>
-        /// <param name="email">
-        /// Email address of the contact you are looking up. Example: 'test@example.com'
-        /// </param>
-        /// <returns></returns>
+        /// <param name="email">The email<see cref="string"/></param>
+        /// <returns><see cref="BasicContactInfo"/></returns>
         public BasicContactInfo GetContactInfo(string email)
         {
-            var getData = new Dictionary<string, string>
-            {
-                {"email", email},
-            };
+            var getData = new Dictionary<string, string> { { "email", email } };
             var jsonResponse = SendRequest("contact_view_email", getData, null);
 
-            var response = JsonConvert.DeserializeObject<BasicContactInfo>(jsonResponse);
-            return response;
+            return JsonConvert.DeserializeObject<BasicContactInfo>(jsonResponse);
         }
 
         /// <summary>
@@ -35,17 +46,17 @@ namespace ActiveCampaign.Net.Services
         /// </summary>
         /// <param name="basicContactInfo"></param>
         /// <param name="contactLists"></param>
-        /// <returns></returns>
+        /// <returns><see cref="ContactSyncResponse"/></returns>
         public ContactSyncResponse SyncContact(BasicContactInfo basicContactInfo, IEnumerable<BasicContactList> contactLists)
         {
             var postData = new Dictionary<string, string>
             {
-                {"email", basicContactInfo.Email},
-                {"first_name", basicContactInfo.FirstName ?? ""},
-                {"last_name", basicContactInfo.LastName ?? ""},
-                {"phone", basicContactInfo.Phone ?? ""},
-                {"orgname", basicContactInfo.OrganizationName ?? ""},
-                {"form", basicContactInfo.FormId.ToString() ?? ""},
+                { "email", basicContactInfo.Email },
+                { "first_name", basicContactInfo.FirstName ?? string.Empty },
+                { "last_name", basicContactInfo.LastName ?? string.Empty },
+                { "phone", basicContactInfo.Phone ?? string.Empty },
+                { "orgname", basicContactInfo.OrganizationName ?? string.Empty },
+                { "form", basicContactInfo.FormId.ToString() ?? string.Empty },
             };
 
             if (basicContactInfo.Tags != null && basicContactInfo.Tags.Any())
@@ -55,14 +66,27 @@ namespace ActiveCampaign.Net.Services
 
             foreach (var contactList in contactLists)
             {
-                postData.Add(string.Format("p[{0}]", contactList.Id), contactList.Id.ToString());
-                postData.Add(string.Format("status[{0}]", contactList.Id), contactList.Status.ToString("D"));
-                postData.Add(string.Format("noresponders[{0}]", contactList.Id),
+                postData.Add(
+                    string.Format("p[{0}]", contactList.Id), contactList.Id.ToString());
+
+                postData.Add(
+                    string.Format("status[{0}]", contactList.Id),
+                    contactList.Status.ToString("D"));
+
+                postData.Add(
+                    string.Format("noresponders[{0}]", contactList.Id),
                     Convert.ToInt32(contactList.Noresponders).ToString());
-                postData.Add(string.Format("sdate[{0}]", contactList.Id), contactList.SubscribeDate);
-                postData.Add(string.Format("instantresponders[{0}]", contactList.Id),
+
+                postData.Add(
+                    string.Format("sdate[{0}]", contactList.Id),
+                    contactList.SubscribeDate);
+
+                postData.Add(
+                    string.Format("instantresponders[{0}]", contactList.Id),
                     Convert.ToInt32(contactList.InstantResponders).ToString());
-                postData.Add(string.Format("lastmessage[{0}]", contactList.Id),
+
+                postData.Add(
+                    string.Format("lastmessage[{0}]", contactList.Id),
                     Convert.ToInt32(contactList.LastMessage).ToString());
             }
 
@@ -70,16 +94,17 @@ namespace ActiveCampaign.Net.Services
             {
                 foreach (var field in basicContactInfo.Fields)
                 {
-                    postData.Add(string.Format("field[{0},0]", field.Id != null ? field.Id.ToString() : field.Name),
+                    postData.Add(
+                        string.Format("field[{0},0]", field.Id != null ? field.Id.ToString() : field.Name),
                         field.Value);
                 }
             }
 
             var jsonResponse = SendRequest("contact_sync", null, postData);
 
-            var response = JsonConvert.DeserializeObject<ContactSyncResponse>(jsonResponse);
-
-            return response;
+            return JsonConvert.DeserializeObject<ContactSyncResponse>(jsonResponse);
         }
+
+        #endregion
     }
 }
