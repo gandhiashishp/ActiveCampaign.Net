@@ -6,7 +6,7 @@ namespace ActiveCampaign.Net.Services
     {
         public ExceptionService(string errorMessage)
                 : base(errorMessage)
-            {
+        {
         }
     }
 }
