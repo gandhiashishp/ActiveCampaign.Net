@@ -5,9 +5,11 @@ namespace ActiveCampaign.Net.Models.Contact
 {
     public class BasicContactInfo
     {
+        [Newtonsoft.Json.JsonProperty("id")]
         public int Id { get; set; }
 
         [Required]
+        [Newtonsoft.Json.JsonProperty("email")]
         public string Email { get; set; }
 
         [Newtonsoft.Json.JsonProperty("first_name")]
@@ -28,9 +30,9 @@ namespace ActiveCampaign.Net.Models.Contact
         [Newtonsoft.Json.JsonProperty("ip4")]
         public string IPAddress { get; set; }
 
-        public List<Field> Fields { get; set; }
+        //public List<Field> Fields { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("form")]
+        [Newtonsoft.Json.JsonProperty("formid")]
         public int FormId { get; set; }
     }
 }
