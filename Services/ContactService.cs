@@ -90,15 +90,15 @@
                     Convert.ToInt32(contactList.LastMessage).ToString());
             }
 
-            if (basicContactInfo.Fields != null && basicContactInfo.Fields.Any())
-            {
-                foreach (var field in basicContactInfo.Fields)
-                {
-                    postData.Add(
-                        string.Format("field[{0},0]", field.Id != null ? field.Id.ToString() : field.Name),
-                        field.Value);
-                }
-            }
+            //if (basicContactInfo.Fields != null && basicContactInfo.Fields.Any())
+            //{
+            //    foreach (var field in basicContactInfo.Fields)
+            //    {
+            //        postData.Add(
+            //            string.Format("field[{0},0]", field.Id != null ? field.Id.ToString() : field.Name),
+            //            field.Value);
+            //    }
+            //}
 
             var jsonResponse = SendRequest("contact_sync", null, postData);
 

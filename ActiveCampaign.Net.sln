@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveCampaign.Net", "ActiveCampaign.Net.csproj", "{B95C860B-3890-4095-93C4-CA81055B3069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveCampaign.Net.Tests", "..\ActiveCampaign.Net.Tests\ActiveCampaign.Net.Tests.csproj", "{19673450-C0BB-4DD0-91BC-78E59CBFDD53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveCampaignTester", "..\ActiveCampaignTester\ActiveCampaignTester.csproj", "{58D8ECBC-D92A-467B-8652-953E1998FD6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B95C860B-3890-4095-93C4-CA81055B3069}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B95C860B-3890-4095-93C4-CA81055B3069}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B95C860B-3890-4095-93C4-CA81055B3069}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19673450-C0BB-4DD0-91BC-78E59CBFDD53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19673450-C0BB-4DD0-91BC-78E59CBFDD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19673450-C0BB-4DD0-91BC-78E59CBFDD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19673450-C0BB-4DD0-91BC-78E59CBFDD53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D8ECBC-D92A-467B-8652-953E1998FD6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D8ECBC-D92A-467B-8652-953E1998FD6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D8ECBC-D92A-467B-8652-953E1998FD6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D8ECBC-D92A-467B-8652-953E1998FD6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
